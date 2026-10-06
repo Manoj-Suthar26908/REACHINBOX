@@ -106,3 +106,31 @@ You can run the full system immediately without starting Docker:
 - `POST /api/emails/reset-rate-limit` — Reset hourly sender counter for testing.
 - `GET /api/admin/queue-stats` — Live queue metrics (delayed, sent, processing).
 - `GET /admin/queues` — Bull-Board Queue Dashboard.
+
+
+-- Architecture--
+- User
+ │
+ ▼
+React Frontend
+ │
+ ▼
+Express / Node API
+ │
+ ├── PostgreSQL
+ │
+ ├── Elasticsearch
+ │
+ ├── Redis
+ │
+ ▼
+BullMQ Queue
+ │
+ ▼
+Worker
+ │
+ ▼
+Email Delivery
+ │
+ ▼
+Slack Notifications explain
