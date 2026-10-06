@@ -135,5 +135,8 @@ Email Delivery
  ▼
 Slack Notifications explain
 
+<img width="1024" height="1536" alt="ChatGPT Image Oct 6, 2026, 08_19_40 AM" src="https://github.com/user-attachments/assets/ab25e21a-a18d-4e5e-abf2-22dc9786de4b" />
+
+
 
 When a user schedules an email from the dashboard, the request is sent from the React frontend to the Express.js backend. The backend first validates the data and stores the email details in PostgreSQL. After that, it creates a delayed job using BullMQ and places it in Redis. Redis acts as the queue storage and keeps the job until its scheduled time arrives. Once the scheduled time is reached, a BullMQ worker automatically picks up the job and sends the email. After successful delivery, the email status is updated in PostgreSQL and indexed in Elasticsearch, allowing users to search emails quickly. Additionally, important events such as rate-limit warnings, failures, or system alerts are sent to Slack for real-time monitoring. This architecture ensures reliable and scalable email scheduling without relying on traditional cron jobs, making it suitable for production-level applications.
